@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../bloc/mission_manager.dart';
 import 'edit_stage_page.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class MissionPage extends StatelessWidget {
   const MissionPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    //MissionManager missionManager = Provider.of<MissionManager>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('New Mission'),
@@ -21,8 +22,45 @@ class MissionPage extends StatelessWidget {
               primary: Colors.white,
             ),
             onPressed: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => RunMissionPage()));
+              var url = Uri.parse(
+                  'https://g3n50ajpa9.execute-api.eu-central-1.amazonaws.com/default/mission_planner');
+              http
+                  .post(url,
+                      body: json.encode(<String, dynamic>{
+                        "output": 0,
+                        "isSkydio": true,
+                        "isMultiMission": true,
+                        "requests": [
+                          {
+                            "alpha": 84.0,
+                            "theta": 56.0,
+                            "overlap_h": 70.0,
+                            "overlap_v": 70.0,
+                            "pitch": 0.0,
+                            "R": 1,
+                            "H": 40,
+                            "r": 2.0,
+                            "obj_cx": 37.52316,
+                            "obj_cy": 55.27685,
+                            "obj_cz": 0.0,
+                            "type": 1,
+                            "home_cy": 0,
+                            "home_cx": 0,
+                            "start_z": 0.0,
+                            "stop_z": 20,
+                            "cam_edge": true,
+                            "fence_enabled": false,
+                            "fence_offset": null,
+                          }
+                        ]
+                      }))
+                  .then((response) {
+                dynamic map = json.decode(response.body);
+                print(map["1"]);
+                //print(json.decode(json.decode(response.body)));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const RunMissionPage()));
+              });
             },
             child: const Text('Start'),
           ),
@@ -59,10 +97,9 @@ class MissionPage extends StatelessWidget {
           onPressed: () {
             mm.updateFormValue(mm.addStage());
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) =>
-                  EditStagePage(
-                    stageId: mm.stages.length - 1,
-                  )));
+                builder: (context) => EditStagePage(
+                      stageId: mm.stages.length - 1,
+                    )));
           },
         );
       }),
