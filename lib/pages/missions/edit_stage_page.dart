@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../bloc/mission_manager.dart';
+import '../../business_logic/view_models/missionpage_viewmodel.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class EditStagePage extends StatelessWidget {
@@ -11,7 +11,8 @@ class EditStagePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _type = ["Vertical snake", "Spiral"];
-    MissionManager missionManager = Provider.of<MissionManager>(context);
+    MissionPageViewModel missionManager =
+        Provider.of<MissionPageViewModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Stage ${stageId + 1}'),

@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../bloc/mission_manager.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class RunMissionPage extends StatelessWidget {
@@ -10,13 +9,13 @@ class RunMissionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _type = ["Vertical snake", "Spiral"];
-    MissionManager missionManager = Provider.of<MissionManager>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Запуск миссии'),
       ),
       body: ListView(
         children: [
+          /*
           ReactiveForm(
             formGroup: missionManager.form,
             child: ReactiveTextField<double>(
@@ -45,6 +44,7 @@ class RunMissionPage extends StatelessWidget {
               },
             ),
           ),
+       */
         ],
       ),
     );

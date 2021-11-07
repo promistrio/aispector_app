@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'pages/missions/mission_page.dart';
-import 'bloc/mission_manager.dart';
+import 'business_logic/view_models/missionpage_viewmodel.dart';
 
 /// This is a reimplementation of the default Flutter application using provider + [ChangeNotifier].
 void main() {
@@ -11,7 +11,7 @@ void main() {
     /// can use [MyApp] while mocking the providers
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => MissionManager()),
+        ChangeNotifierProvider(create: (_) => MissionPageViewModel()),
       ],
       child: const MyApp(),
     ),
