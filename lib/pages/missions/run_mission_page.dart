@@ -1,14 +1,15 @@
+import 'package:airspector/business_logic/models/stages.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:airspector/business_logic/models/stages.dart';
 
 class RunMissionPage extends StatelessWidget {
-  const RunMissionPage({Key? key}) : super(key: key);
-
+  final Stages stages;
+  RunMissionPage({Key? key, required this.stages}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var _type = ["Vertical snake", "Spiral"];
     return Scaffold(
       appBar: AppBar(
         title: const Text('Запуск миссии'),

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../business_logic/view_models/missionpage_viewmodel.dart';
+import '../../business_logic/providers/mission_provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class EditStagePage extends StatelessWidget {
@@ -11,8 +11,7 @@ class EditStagePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _type = ["Vertical snake", "Spiral"];
-    MissionPageViewModel missionManager =
-        Provider.of<MissionPageViewModel>(context);
+    MissionProvider missionManager = Provider.of<MissionProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Stage ${stageId + 1}'),
@@ -24,7 +23,7 @@ class EditStagePage extends StatelessWidget {
             ),
             onPressed: () {
               missionManager.deleteStage(stageId);
-              Navigator.pop(context);
+              Navigator.pop(context, "Stage has been deleted");
             },
             child: const Text('Удалить'),
           ),
@@ -35,7 +34,7 @@ class EditStagePage extends StatelessWidget {
             ),
             onPressed: () {
               missionManager.writeFormToStage(stageId);
-              Navigator.pop(context);
+              Navigator.pop(context, "Stage has been changed");
             },
             child: const Text('Сохранить'),
           ),
@@ -44,7 +43,7 @@ class EditStagePage extends StatelessWidget {
       body: ListView(
         children: [
           ReactiveForm(
-            formGroup: missionManager.form,
+            formGroup: missionManager.missionController.form,
             child: ReactiveDropdownField<bool>(
               formControlName: 'type',
               decoration: const InputDecoration(
@@ -57,8 +56,8 @@ class EditStagePage extends StatelessWidget {
             ),
           ),
           ReactiveForm(
-            formGroup: missionManager.form,
-            child: ReactiveTextField<double>(
+            formGroup: missionManager.missionController.form,
+            child: ReactiveTextField<int>(
               formControlName: 'start_z',
               keyboardType: TextInputType.number,
               showErrors: (control) => control.invalid,
@@ -71,8 +70,8 @@ class EditStagePage extends StatelessWidget {
             ),
           ),
           ReactiveForm(
-            formGroup: missionManager.form,
-            child: ReactiveTextField<double>(
+            formGroup: missionManager.missionController.form,
+            child: ReactiveTextField<int>(
               formControlName: 'stop_z',
               keyboardType: TextInputType.number,
               showErrors: (control) => control.invalid,
@@ -85,8 +84,8 @@ class EditStagePage extends StatelessWidget {
             ),
           ),
           ReactiveForm(
-            formGroup: missionManager.form,
-            child: ReactiveTextField<double>(
+            formGroup: missionManager.missionController.form,
+            child: ReactiveTextField<int>(
               formControlName: 'R',
               keyboardType: TextInputType.number,
               showErrors: (control) => control.invalid,
@@ -99,8 +98,8 @@ class EditStagePage extends StatelessWidget {
             ),
           ),
           ReactiveForm(
-            formGroup: missionManager.form,
-            child: ReactiveTextField<double>(
+            formGroup: missionManager.missionController.form,
+            child: ReactiveTextField<int>(
               formControlName: 'pitch',
               keyboardType: TextInputType.number,
               showErrors: (control) => control.invalid,
@@ -114,7 +113,7 @@ class EditStagePage extends StatelessWidget {
             ),
           ),
           ReactiveForm(
-            formGroup: missionManager.form,
+            formGroup: missionManager.missionController.form,
             child: ReactiveTextField<int>(
               formControlName: 'overlap_h',
               keyboardType: TextInputType.number,
@@ -129,7 +128,7 @@ class EditStagePage extends StatelessWidget {
             ),
           ),
           ReactiveForm(
-            formGroup: missionManager.form,
+            formGroup: missionManager.missionController.form,
             child: ReactiveTextField<int>(
               formControlName: 'overlap_v',
               keyboardType: TextInputType.number,

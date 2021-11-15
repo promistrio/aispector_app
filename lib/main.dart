@@ -2,16 +2,18 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'pages/missions/mission_page.dart';
-import 'business_logic/view_models/missionpage_viewmodel.dart';
+import 'business_logic/providers/mission_provider.dart';
+import 'package:airspector/business_logic/controllers/mission_edit_controller.dart';
 
-/// This is a reimplementation of the default Flutter application using provider + [ChangeNotifier].
 void main() {
+  MissionEditController missionController = MissionEditController();
+
   runApp(
-    /// Providers are above [MyApp] instead of inside it, so that tests
-    /// can use [MyApp] while mocking the providers
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => MissionPageViewModel()),
+        ChangeNotifierProvider(
+            create: (_) =>
+                MissionProvider(missionController: missionController)),
       ],
       child: const MyApp(),
     ),
