@@ -1,6 +1,7 @@
 import 'package:airspector/business_logic/models/stages.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:airspector/business_logic/controllers/mission_api_controller.dart';
+import 'package:airspector/business_logic/models/points.dart';
 
 class MissionEditController {
   late List<Stage> stages = [];
@@ -24,6 +25,9 @@ class MissionEditController {
   void deleteStage(int i) {
     stages.removeAt(i);
   }
+
+  Future<WayPoints> get waypoinsFromApi =>
+      api.requestGeneratedMission(stagesModel);
 
   int getLastStageId() => stages.length - 1;
 

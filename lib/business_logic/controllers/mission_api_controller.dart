@@ -2,15 +2,14 @@ import 'dart:convert';
 
 import 'package:airspector/business_logic/models/stages.dart';
 import 'package:http/http.dart' as http;
+import 'package:airspector/business_logic/models/points.dart';
 
 class MissionApiController {
-  Future<Stages> requestGeneratedMission(Stages stages) async {
-    print("hello");
+  Future<WayPoints> requestGeneratedMission(Stages stages) async {
     Map<String, String> headers = {
       'Content-Type': 'application/json; charset=UTF-8',
     };
     String body = jsonEncode(stages.toJson());
-    print(body);
     final response = await http.post(
       Uri.parse(
           'https://g3n50ajpa9.execute-api.eu-central-1.amazonaws.com/default/mission_planner'),
@@ -19,8 +18,7 @@ class MissionApiController {
     );
 
     if (response.statusCode == 200) {
-      print(response.body);
-      return Stages([]);
+      return WayPoints(jsonDecode(response.body)["route-meta"]["points"]);
     } else {
       // If the server did not return a 201 CREATED response,
       // then throw an exception.
