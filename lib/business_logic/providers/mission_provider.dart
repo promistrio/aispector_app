@@ -15,7 +15,7 @@ class MissionProvider with ChangeNotifier, DiagnosticableTreeMixin {
 
   // add stage to end and return id
   int addStage() {
-    missionController.pushStage(Stage(1, 3, 20, 30));
+    missionController.pushStage(Stage(1, 0, 0, 0));
     notifyListeners();
     return missionController.getLastStageId();
   }

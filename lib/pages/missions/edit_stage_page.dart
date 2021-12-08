@@ -44,14 +44,14 @@ class EditStagePage extends StatelessWidget {
         children: [
           ReactiveForm(
             formGroup: missionManager.missionController.form,
-            child: ReactiveDropdownField<bool>(
+            child: ReactiveDropdownField<int>(
               formControlName: 'type',
               decoration: const InputDecoration(
                 labelText: 'Тип',
               ),
               items: const [
-                DropdownMenuItem(value: true, child: Text('Спираль')),
-                DropdownMenuItem(value: false, child: Text('Змейка/Зиг-Заг')),
+                DropdownMenuItem(value: 1, child: Text('Спираль')),
+                DropdownMenuItem(value: 2, child: Text('Змейка/Зиг-Заг')),
               ],
             ),
           ),
@@ -86,7 +86,7 @@ class EditStagePage extends StatelessWidget {
           ReactiveForm(
             formGroup: missionManager.missionController.form,
             child: ReactiveTextField<int>(
-              formControlName: 'R',
+              formControlName: 'r',
               keyboardType: TextInputType.number,
               showErrors: (control) => control.invalid,
               decoration: const InputDecoration(
