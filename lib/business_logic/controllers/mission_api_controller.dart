@@ -13,7 +13,7 @@ class MissionApiController {
       'Content-Type': 'application/json; charset=UTF-8',
     };
     String body = jsonEncode(stages.toJson());
-    //print(body);
+    print(body);
     final response = await http.post(
       Uri.parse(
           'https://g3n50ajpa9.execute-api.eu-central-1.amazonaws.com/default/mission_planner'),
