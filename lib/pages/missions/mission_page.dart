@@ -34,23 +34,32 @@ class MissionPage extends StatelessWidget {
       ),
       body: Consumer<MissionProvider>(
         builder: (context, mm, child) {
-          return ListView(
-            padding: const EdgeInsets.all(8),
+          return ReorderableListView(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             children: List.generate(
               mm.missionController.stages.length,
               (i) => ListTile(
-                leading: const Icon(
-                  Icons.flight,
-                  color: Colors.black,
-                ),
+                key: UniqueKey(),
+                leading: (mm.missionController.stages[i].type == 1)
+                    ? const Icon(
+                        Icons.change_circle_outlined,
+                        color: Colors.black,
+                      )
+                    : const Icon(
+                        Icons.arrow_upward,
+                        color: Colors.black,
+                      ),
                 title: Text(
-                    "Stage ${i + 1} ${mm.missionController.stages[i].start_z.toString()} - ${mm.missionController.stages[i].stop_z.toString()} ${mm.missionController.stages[i].pitch.toString()}deg"), //"5-20 m 90 deg"*/
+                    "${mm.missionController.stages[i].start_z.toString()} - ${mm.missionController.stages[i].stop_z.toString()} ${mm.missionController.stages[i].pitch.toString()}deg"), //"5-20 m 90 deg"*/
                 onTap: () {
                   mm.updateFormValue(i);
                   _navigateEditStage(context, i);
                 },
               ),
             ),
+            onReorder: (int oldIndex, int newIndex) {
+              mm.reorderStage(oldIndex, newIndex);
+            },
           );
         },
       ),

@@ -1,8 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-//import 'dart:convert';
-import 'package:reactive_forms/reactive_forms.dart';
 // Models
 import 'package:airspector/business_logic/models/stages.dart';
 import 'package:airspector/business_logic/models/points.dart';
@@ -22,6 +19,11 @@ class MissionProvider with ChangeNotifier, DiagnosticableTreeMixin {
 
   void updateFormValue(int i) {
     missionController.updateFormValue(i);
+    notifyListeners();
+  }
+
+  void reorderStage(int oldIndex, int newIndex) {
+    missionController.reorderStage(oldIndex, newIndex);
     notifyListeners();
   }
 

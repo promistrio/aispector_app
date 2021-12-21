@@ -20,6 +20,14 @@ class MissionEditController {
     return stages.length - 1;
   }
 
+  void reorderStage(int oldIndex, int newIndex) {
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+    final item = stages.removeAt(oldIndex);
+    stages.insert(newIndex, item);
+  }
+
   // delete stage by ID
   void deleteStage(int i) {
     stages.removeAt(i);

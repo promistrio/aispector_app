@@ -10,7 +10,6 @@ class EditStagePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _type = ["Vertical snake", "Spiral"];
     MissionProvider missionManager = Provider.of<MissionProvider>(context);
     return Scaffold(
       appBar: AppBar(
@@ -51,7 +50,8 @@ class EditStagePage extends StatelessWidget {
               ),
               items: const [
                 DropdownMenuItem(value: 1, child: Text('Спираль')),
-                DropdownMenuItem(value: 2, child: Text('Змейка/Зиг-Заг')),
+                DropdownMenuItem(
+                    value: 2, child: Text('Змейка/Зиг-Заг')),
               ],
             ),
           ),
@@ -65,7 +65,8 @@ class EditStagePage extends StatelessWidget {
                 labelText: 'Начальная высота, метры',
               ),
               validationMessages: (control) => {
-                ValidationMessage.min: 'Значение должно быть не меньше нуля',
+                ValidationMessage.min:
+                    'Значение должно быть не меньше нуля',
               },
             ),
           ),
@@ -79,7 +80,8 @@ class EditStagePage extends StatelessWidget {
                 labelText: 'Конечная высота, метры',
               ),
               validationMessages: (control) => {
-                ValidationMessage.min: 'Значение должно быть не меньше нуля',
+                ValidationMessage.min:
+                    'Значение должно быть не меньше нуля',
               },
             ),
           ),
@@ -93,7 +95,8 @@ class EditStagePage extends StatelessWidget {
                 labelText: 'Дистанция до объекта, метры',
               ),
               validationMessages: (control) => {
-                ValidationMessage.min: 'Значение должно быть не меньше нуля',
+                ValidationMessage.min:
+                    'Значение должно быть не меньше нуля',
               },
             ),
           ),
@@ -107,8 +110,10 @@ class EditStagePage extends StatelessWidget {
                 labelText: 'Наклон камеры, градусы',
               ),
               validationMessages: (control) => {
-                ValidationMessage.min: 'Значение должно быть в диапазоне 0-90',
-                ValidationMessage.max: 'Значение должно быть в диапазоне 0-90',
+                ValidationMessage.min:
+                    'Значение должно быть в диапазоне 0-90',
+                ValidationMessage.max:
+                    'Значение должно быть в диапазоне 0-90',
               },
             ),
           ),
@@ -119,11 +124,14 @@ class EditStagePage extends StatelessWidget {
               keyboardType: TextInputType.number,
               showErrors: (control) => control.invalid,
               decoration: const InputDecoration(
-                labelText: 'Горизонтальное перекрытие, %',
+                labelText:
+                    'Горизонтальное перекрытие, %',
               ),
               validationMessages: (control) => {
-                ValidationMessage.min: 'Значение должно быть в диапазоне 0-100',
-                ValidationMessage.max: 'Значение должно быть в диапазоне 0-100',
+                ValidationMessage.min:
+                    'Значение должно быть в диапазоне 0-100',
+                ValidationMessage.max:
+                    'Значение должно быть в диапазоне 0-100',
               },
             ),
           ),
@@ -137,8 +145,10 @@ class EditStagePage extends StatelessWidget {
                 labelText: 'Вертикальное перекрытие',
               ),
               validationMessages: (control) => {
-                ValidationMessage.min: 'Значение должно быть в диапазоне 0-100',
-                ValidationMessage.max: 'Значение должно быть в диапазоне 0-100',
+                ValidationMessage.min:
+                    'Значение должно быть в диапазоне 0-100',
+                ValidationMessage.max:
+                    'Значение должно быть в диапазоне 0-100',
               },
             ),
           ),

@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:airspector/business_logic/models/points.dart';
 import 'package:airspector/business_logic/models/stages.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:airspector/business_logic/providers/mission_provider.dart';
@@ -59,7 +56,8 @@ class RunMissionPage extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   showErrors: (control) => control.invalid,
                   decoration: const InputDecoration(
-                    labelText: 'Количество полетных точек',
+                    labelText:
+                        'Количество полетных точек',
                   ),
                   validationMessages: (control) => {
                     ValidationMessage.min:
@@ -75,7 +73,8 @@ class RunMissionPage extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   showErrors: (control) => control.invalid,
                   decoration: const InputDecoration(
-                    labelText: 'расчетная длительность полета',
+                    labelText:
+                        'расчетная длительность полета',
                   ),
                   validationMessages: (control) => {
                     ValidationMessage.min:
@@ -91,8 +90,8 @@ class RunMissionPage extends StatelessWidget {
                       form.control("output").value = value;
                       ScaffoldMessenger.of(context)
                         ..removeCurrentSnackBar()
-                        ..showSnackBar(
-                            const SnackBar(content: Text("Загружено")));
+                        ..showSnackBar(const SnackBar(
+                            content: Text("Загружено")));
                     });
                   },
                   child: const Text('Login To Device')),
@@ -102,8 +101,8 @@ class RunMissionPage extends StatelessWidget {
                       form.control("output").value = value;
                       ScaffoldMessenger.of(context)
                         ..removeCurrentSnackBar()
-                        ..showSnackBar(
-                            const SnackBar(content: Text("Загружено")));
+                        ..showSnackBar(const SnackBar(
+                            content: Text("Загружено")));
                     });
                   },
                   child: const Text('SkillSet')),
@@ -113,8 +112,8 @@ class RunMissionPage extends StatelessWidget {
                       form.control("output").value = value;
                       ScaffoldMessenger.of(context)
                         ..removeCurrentSnackBar()
-                        ..showSnackBar(
-                            const SnackBar(content: Text("Загружено")));
+                        ..showSnackBar(const SnackBar(
+                            content: Text("Загружено")));
                     });
                   },
                   child: const Text('Upload'))
