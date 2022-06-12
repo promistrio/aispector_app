@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'pages/missions/mission_page.dart';
+//import 'pages/missions/mission_page.dart';
 import 'business_logic/providers/mission_provider.dart';
 import 'package:airspector/business_logic/controllers/mission_edit_controller.dart';
+import 'pages/missions/mission_from_file_page.dart';
 
 void main() {
   MissionEditController missionController = MissionEditController();
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
         // Define the default `TextTheme`. Use this to specify the default
         // text styling for headlines, titles, bodies of text, and more.
       ),
-      home: const MissionPage(),
+      home: const MissionFromFilePage(),
     );
   }
 }
