@@ -1,11 +1,10 @@
 import 'dart:convert';
 
-import 'package:airspector/pages/missions/run_mission_page.dart';
+import 'package:airspector/pages/missions/run_mission_form_file_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:airspector/business_logic/providers/mission_provider.dart';
-import 'edit_stage_page.dart';
 
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
@@ -28,7 +27,11 @@ class MissionFromFilePage extends StatelessWidget {
               // if user has been select file
               if (missionFile != null) {
                 File file = File(missionFile.files.single.path ?? "");
-                parseMission(file.readAsStringSync());
+
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => RunMissionFromFilePage(
+                          jsonMission: parseMission(file.readAsStringSync()),
+                        )));
               } else {
                 // User canceled the picker
               }
@@ -38,7 +41,7 @@ class MissionFromFilePage extends StatelessWidget {
     ));
   }
 
-  parseMission(String data) {
+  String parseMission(String data) {
     Map<String, dynamic> outputMission = {};
     Map<String, dynamic> mission = jsonDecode(data);
     int counter = 1;
@@ -53,8 +56,8 @@ class MissionFromFilePage extends StatelessWidget {
             pitch = item['params'][0];
           }
           if (item["command"] == 16) {
-            double lat = item["params"][4];
-            double lon = item["params"][5];
+            double lat = item["params"][4].toDouble();
+            double lon = item["params"][5].toDouble();
             double alt = item["params"][6].toDouble();
             outputMission[counter.toString()] = {
               "cmd_drone": 16,
@@ -74,11 +77,9 @@ class MissionFromFilePage extends StatelessWidget {
           dynamic routeItems = item['TransectStyleComplexItem']['Items'];
           for (dynamic rItem in routeItems) {
             if (rItem['command'] == 16) {
-              dynamic ln = {};
-              double lat = rItem['params'][4];
-              double lon = rItem['params'][5];
-              double alt = rItem['params'][6];
-              int cmd_drone = 16;
+              double lat = rItem['params'][4].toDouble();
+              double lon = rItem['params'][5].toDouble();
+              double alt = rItem['params'][6].toDouble();
               outputMission[counter.toString()] = {
                 "cmd_drone": 16,
                 "x": 0,
@@ -97,5 +98,7 @@ class MissionFromFilePage extends StatelessWidget {
       }
       print(jsonEncode(outputMission));
     }
+
+    return jsonEncode(outputMission);
   }
 }

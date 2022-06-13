@@ -86,7 +86,7 @@ class MissionApiController {
     }
   }
 
-  Future<String> uploadMissionSkydio() async {
+  Future<String> uploadMissionSkydioFromJson(String json) async {
     Map<String, String> headers = {
       'Content-Type': 'application/json; charset=UTF-8',
       'Accept': 'application/json',
@@ -94,7 +94,7 @@ class MissionApiController {
     };
 
     String body = jsonEncode({
-      "data": base64.encode(utf8.encode(_points)),
+      "data": base64.encode(utf8.encode(json)),
       "skill_key": 'airspector2.wp_flight.WpFlight',
       "no_response": false,
     });
@@ -104,13 +104,7 @@ class MissionApiController {
       body: body,
     );
 
-    print(_points);
-
-    /*let response = await axios.post(process.env.REACT_APP_ROUTES_URL as unknown as string, {//http://192.168.10.1/api/custom_comms
-        data: btoa(JSON.stringify({route: routes})),
-        skill_key: 'airspector2.wp_flight.WpFlight',
-        no_response: false
-    }, {headers: {'Accept': 'application/json', 'Authorization': 'Bearer ' + token} })``*/
+    print(json);
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body)["data"]["data"];
@@ -120,6 +114,8 @@ class MissionApiController {
       throw Exception('Failed to upload mission.');
     }
   }
+
+  Future<String> uploadMissionSkydio() => uploadMissionSkydioFromJson(_points);
 
   /*
   import 'dart:convert';

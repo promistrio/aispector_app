@@ -37,6 +37,10 @@ class MissionEditController {
   Future<String> skillset() => api.skillsetSkydio();
   Future<String> upload() => api.uploadMissionSkydio();
 
+  //upload json which has been getted from file convertion
+  Future<String> uploadFromFile(String json) =>
+      api.uploadMissionSkydioFromJson(json);
+
   Future<WayPoints> get waypoinsFromApi =>
       api.requestGeneratedMission(stagesModel);
 
